@@ -89,3 +89,24 @@ int Titanic_duration[] = {
 };
 //###########End of Titanic#############//
 
+int HappyBD_note[] = {
+
+  // Happy Birthday
+  // Score available at https://musescore.com/user/8221/scores/26906
+
+  NOTE_C4, NOTE_C4, 
+  NOTE_D4, NOTE_C4, NOTE_F4,
+  NOTE_E4, NOTE_C4, NOTE_C4, 
+  NOTE_D4, NOTE_C4, NOTE_G4,
+  NOTE_F4, NOTE_C4, NOTE_C4,
+
+  NOTE_C5, NOTE_A4, NOTE_F4, 
+  NOTE_E4, NOTE_D4, NOTE_AS4, NOTE_AS4,
+  NOTE_A4, NOTE_F4, NOTE_G4,
+  NOTE_F4,
+ 
+};
+
+int HappyBD_duration[] = {
+  4,8,4,4,4,4,4,8,4,4,4,2,4,8,4,4,4,4,4,4,8,4,4,4,2
+};

@@ -20,7 +20,7 @@ const int ldrMeter = A1;
 const int speakerPin = A2;
 
 // variables will change:
-int potValue;
+double potValue;
 int ldrValue;
 int btnStatePrevious = 0;         // variable for reading the pushbutton status
 int lastStatePrevious = 0;
@@ -60,7 +60,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   
-  potValue = analogRead(potMeter) / 100;    // Value between 0 - 10, 10 being HIGH
+  potValue = analogRead(potMeter) / 500.1 + 0.2;    // Value between 0 - 10, 10 being HIGH
   Serial.println(potValue);
   buttonState();
   ldrThings();
@@ -93,7 +93,7 @@ void buttonState() {
 void ldrThings() {
   ldrValue = analogRead(ldrMeter) / 100;    // Value between 0 - 10, 10 being bright
   Serial.println(ldrValue);
-  if(ldrValue >= 3) {
+  if(ldrValue >= 8) {
     canPlayMusic = true;
     digitalWrite(ledGreen, HIGH);
     digitalWrite(ledRed, LOW);
@@ -113,27 +113,97 @@ void playSong() {
     }
     else if(songnumber == 1) {
       displayOne();
+      for (int thisNote = 0; thisNote < (sizeof(Titanic_note)/sizeof(int)); thisNote++) {
+        potValue = analogRead(potMeter) / 200.1;
+        buttonState();
+        if(songnumber != 1) {
+          continue;
+        }
+        ldrThings();
+        if(canPlayMusic == false) {
+          continue;
+        }
+        int noteDuration = 1000 / Titanic_duration[thisNote];//convert duration to time delay
+        int pauseBetweenNotes = noteDuration * potValue; //Here 1.05 is tempo, increase to play it slower
+        tone(speakerPin, Titanic_note[thisNote], noteDuration);
+        delay(pauseBetweenNotes);
+        noTone(speakerPin);
+      }
     }
     else if(songnumber == 2) {
       displayTwo();
+      for (int thisNote = 0; thisNote < (sizeof(CrazyFrog_note)/sizeof(int)); thisNote++) {
+        potValue = analogRead(potMeter) / 200.1;
+        buttonState();
+        if(songnumber != 2) {
+          continue;
+        }
+        ldrThings();
+        if(canPlayMusic == false) {
+          continue;
+        }
+        int noteDuration = 1000 / CrazyFrog_duration[thisNote];//convert duration to time delay
+        int pauseBetweenNotes = noteDuration * potValue; //Here 1.05 is tempo, increase to play it slower
+        tone(speakerPin, CrazyFrog_note[thisNote], noteDuration);
+        delay(pauseBetweenNotes);
+        noTone(speakerPin);
+      }
     }
     else if(songnumber == 3) {
       displayThree();
+      for (int thisNote = 0; thisNote < (sizeof(MarioUW_note)/sizeof(int)); thisNote++) {
+        potValue = analogRead(potMeter) / 200.1;
+        buttonState();
+        if(songnumber != 3) {
+          continue;
+        }
+        ldrThings();
+        if(canPlayMusic == false) {
+          continue;
+        }
+        int noteDuration = 1000 / MarioUW_duration[thisNote];//convert duration to time delay
+        int pauseBetweenNotes = noteDuration * potValue; //Here 1.05 is tempo, increase to play it slower
+        tone(speakerPin, MarioUW_note[thisNote], noteDuration);
+        delay(pauseBetweenNotes);
+        noTone(speakerPin);
+      }
     }
     else if(songnumber == 4) {
       displayFour();
+      for (int thisNote = 0; thisNote < (sizeof(Pirates_note)/sizeof(int)); thisNote++) {
+        potValue = analogRead(potMeter) / 200.1;
+        buttonState();
+        if(songnumber != 4) {
+          continue;
+        }
+        ldrThings();
+        if(canPlayMusic == false) {
+          continue;
+        }
+        int noteDuration = 1000 / Pirates_duration[thisNote];//convert duration to time delay
+        int pauseBetweenNotes = noteDuration * potValue; //Here 1.05 is tempo, increase to play it slower
+        tone(speakerPin, Pirates_note[thisNote], noteDuration);
+        delay(pauseBetweenNotes);
+        noTone(speakerPin);
+      }     
     }
     else {
       displayFive();
-      for (int thisNote = 0; thisNote < (sizeof(Pirates_note)/sizeof(int)); thisNote++) {
-        int noteDuration = 1000 / Pirates_duration[thisNote];//convert duration to time delay
-        int pauseBetweenNotes = noteDuration * 1.05; //Here 1.05 is tempo, increase to play it slower
-        tone(speakerPin, Pirates_note[thisNote], noteDuration);
-        //delay(pauseBetweenNotes);
+      for (int thisNote = 0; thisNote < (sizeof(HappyBD_note)/sizeof(int)); thisNote++) {
+        potValue = analogRead(potMeter) / 200.1;
+        buttonState();
+        if(songnumber != 5) {
+          continue;
+        }
+        ldrThings();
+        if(canPlayMusic == false) {
+          continue;
+        }
+        int noteDuration = 1000 / HappyBD_duration[thisNote];//convert duration to time delay
+        int pauseBetweenNotes = noteDuration * potValue; //Here 1.05 is tempo, increase to play it slower
+        tone(speakerPin, HappyBD_note[thisNote], noteDuration);
+        delay(pauseBetweenNotes);
         noTone(speakerPin);
-      }
-      for(int thisNote = 0; thisNote < (sizeof(Pirates_note)/sizeof(int)); thisNote++) {
-        
       }
     }
   }
